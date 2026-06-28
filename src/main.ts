@@ -1,4 +1,4 @@
-import { Plugin, WorkspaceLeaf } from "obsidian";
+import { MarkdownView, Plugin, WorkspaceLeaf, type Editor } from "obsidian";
 import { EditorView } from "@codemirror/view";
 import { DEFAULT_SETTINGS, RefineSettingTab } from "./settings";
 import type { RefineSettings } from "./types";
@@ -11,6 +11,7 @@ import { RefineView, VIEW_TYPE_REFINE } from "./ui/RefineView";
 export default class RefinePlugin extends Plugin {
 	settings!: RefineSettings;
 	skillRegistry = new SkillRegistry();
+	private lastActiveEditor: Editor | null = null;
 
 	async onload(): Promise<void> {
 		await this.loadSettings();
@@ -46,7 +47,13 @@ export default class RefinePlugin extends Plugin {
 				if (update.selectionSet || update.docChanged) this.refreshRefineViews();
 			}),
 		);
-		this.registerEvent(this.app.workspace.on("active-leaf-change", () => this.refreshRefineViews()));
+		this.registerEvent(
+			this.app.workspace.on("active-leaf-change", () => {
+				this.updateLastActiveEditor();
+				this.refreshRefineViews();
+			}),
+		);
+		this.updateLastActiveEditor();
 
 		await ensureDefaultSkills(this, this.settings.skillsFolder);
 		await loadAllSkills(this, this.skillRegistry, this.settings.skillsFolder);
@@ -68,6 +75,15 @@ export default class RefinePlugin extends Plugin {
 	async reloadSkillsFolder(): Promise<void> {
 		await ensureDefaultSkills(this, this.settings.skillsFolder);
 		await loadAllSkills(this, this.skillRegistry, this.settings.skillsFolder);
+	}
+
+	getActiveEditor(): Editor | null {
+		return this.lastActiveEditor;
+	}
+
+	private updateLastActiveEditor(): void {
+		const view = this.app.workspace.getActiveViewOfType(MarkdownView);
+		if (view) this.lastActiveEditor = view.editor;
 	}
 
 	refreshRefineViews(): void {

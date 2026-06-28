@@ -96,7 +96,7 @@ export class RefineView extends ItemView {
 
 	private renderBody(): void {
 		this.bodyEl.empty();
-		const activeEditor = this.app.workspace.activeEditor?.editor;
+		const activeEditor = this.plugin.getActiveEditor();
 		const hasSelection = !!activeEditor && activeEditor.getSelection().length > 0;
 
 		switch (this.state.kind) {
@@ -140,7 +140,7 @@ export class RefineView extends ItemView {
 		if (isRetry && (this.state.kind === "error" || this.state.kind === "result")) {
 			context = this.state.context;
 		} else {
-			const activeEditor = this.app.workspace.activeEditor?.editor;
+			const activeEditor = this.plugin.getActiveEditor();
 			if (!activeEditor) return;
 			const selection = activeEditor.getSelection();
 			if (!selection) return;
@@ -184,7 +184,7 @@ export class RefineView extends ItemView {
 		if (!lastUsedPath) return;
 		const skill = this.plugin.skillRegistry.getByPath(lastUsedPath);
 		if (!skill) return;
-		const activeEditor = this.app.workspace.activeEditor?.editor;
+		const activeEditor = this.plugin.getActiveEditor();
 		if (!activeEditor || !activeEditor.getSelection()) return;
 		void this.runSkill(skill);
 	}
