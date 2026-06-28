@@ -1,0 +1,10 @@
+{
+	"id": "refine",
+	"name": "Refine",
+	"version": "1.0.0",
+	"minAppVersion": "1.4.0",
+	"description": "Transform selected text using an LLM, with prompts ('skills') you own and store as markdown files in your vault.",
+	"author": "tdurouchoux",
+	"authorUrl": "https://github.com/tdurouchoux",
+	"isDesktopOnly": false
+}
