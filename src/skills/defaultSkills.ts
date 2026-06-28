@@ -1,4 +1,5 @@
 import type { Plugin } from "obsidian";
+import { ensureFolder } from "./ensureFolder";
 import makeFormal from "./defaults/make-formal.md";
 import simplify from "./defaults/simplify.md";
 import fixGrammar from "./defaults/fix-grammar.md";
@@ -20,14 +21,15 @@ const DEFAULT_SKILL_FILES: Array<{ fileName: string; content: string }> = [
 export async function ensureDefaultSkills(plugin: Plugin, skillsFolder: string): Promise<void> {
 	const vault = plugin.app.vault;
 
-	if (!vault.getAbstractFileByPath(skillsFolder)) {
-		await vault.createFolder(skillsFolder);
-	}
+	await ensureFolder(vault, skillsFolder);
 
 	for (const { fileName, content } of DEFAULT_SKILL_FILES) {
 		const path = `${skillsFolder}/${fileName}`;
-		if (!vault.getAbstractFileByPath(path)) {
+		if (vault.getAbstractFileByPath(path)) continue;
+		try {
 			await vault.create(path, content);
+		} catch (error) {
+			if (!(error as Error).message?.includes("already exists")) throw error;
 		}
 	}
 }

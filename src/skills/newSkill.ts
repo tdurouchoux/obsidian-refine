@@ -1,12 +1,11 @@
 import type { Plugin } from "obsidian";
 import { buildSkillTemplate } from "./skillTemplate";
+import { ensureFolder } from "./ensureFolder";
 
 export async function createUntitledSkill(plugin: Plugin, skillsFolder: string): Promise<void> {
 	const vault = plugin.app.vault;
 
-	if (!vault.getAbstractFileByPath(skillsFolder)) {
-		await vault.createFolder(skillsFolder);
-	}
+	await ensureFolder(vault, skillsFolder);
 
 	let fileName = "Untitled.md";
 	let suffix = 1;
