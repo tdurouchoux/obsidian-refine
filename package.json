@@ -12,6 +12,7 @@
   },
   "license": "MIT",
   "devDependencies": {
+    "@codemirror/view": "^6.43.4",
     "@types/diff": "^7.0.2",
     "@types/node": "^20.11.0",
     "builtin-modules": "4.0.0",

@@ -1,4 +1,5 @@
 import { Plugin, WorkspaceLeaf } from "obsidian";
+import { EditorView } from "@codemirror/view";
 import { DEFAULT_SETTINGS, RefineSettingTab } from "./settings";
 import type { RefineSettings } from "./types";
 import { SkillRegistry } from "./skills/registry";
@@ -40,6 +41,13 @@ export default class RefinePlugin extends Plugin {
 
 		this.addSettingTab(new RefineSettingTab(this));
 
+		this.registerEditorExtension(
+			EditorView.updateListener.of((update) => {
+				if (update.selectionSet || update.docChanged) this.refreshRefineViews();
+			}),
+		);
+		this.registerEvent(this.app.workspace.on("active-leaf-change", () => this.refreshRefineViews()));
+
 		await ensureDefaultSkills(this, this.settings.skillsFolder);
 		await loadAllSkills(this, this.skillRegistry, this.settings.skillsFolder);
 		registerSkillWatcher(this, this.skillRegistry, () => this.settings.skillsFolder);
@@ -60,6 +68,12 @@ export default class RefinePlugin extends Plugin {
 	async reloadSkillsFolder(): Promise<void> {
 		await ensureDefaultSkills(this, this.settings.skillsFolder);
 		await loadAllSkills(this, this.skillRegistry, this.settings.skillsFolder);
+	}
+
+	refreshRefineViews(): void {
+		for (const leaf of this.app.workspace.getLeavesOfType(VIEW_TYPE_REFINE)) {
+			if (leaf.view instanceof RefineView) leaf.view.render();
+		}
 	}
 
 	private async togglePanel(): Promise<void> {
