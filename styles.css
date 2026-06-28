@@ -6,9 +6,13 @@
 }
 
 .refine-primary-buttons {
-	display: flex;
-	flex-wrap: wrap;
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(6.5rem, 1fr));
 	gap: 0.4rem;
+}
+
+.refine-primary-buttons button {
+	width: 100%;
 }
 
 .refine-skill-search {
@@ -52,13 +56,7 @@
 }
 
 .refine-diff-added {
-	color: var(--text-success);
-	text-decoration: underline;
-}
-
-.refine-diff-removed {
-	color: var(--text-error);
-	text-decoration: line-through;
+	font-weight: 600;
 }
 
 .refine-actions {
