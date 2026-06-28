@@ -11,8 +11,32 @@
 	gap: 0.4rem;
 }
 
-.refine-primary-buttons button {
+.refine-skill-button {
 	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 0.2rem;
+	padding: 0.5rem 0.4rem;
+	border-radius: var(--radius-m);
+	border: 1px solid var(--background-modifier-border);
+	transition: background-color 0.1s ease, border-color 0.1s ease;
+}
+
+.refine-skill-button:hover {
+	background-color: var(--background-modifier-hover);
+}
+
+.refine-skill-button-last-used {
+	border-color: var(--interactive-accent);
+}
+
+.refine-skill-icon {
+	font-size: 1.1em;
+}
+
+.refine-skill-label {
+	font-size: 0.85em;
 }
 
 .refine-skill-search {
@@ -47,12 +71,28 @@
 	}
 }
 
+.refine-card {
+	background: var(--background-secondary);
+	border: 1px solid var(--background-modifier-border);
+	border-radius: var(--radius-m);
+	overflow: hidden;
+}
+
+.refine-card-header {
+	padding: 0.5rem 0.75rem;
+	font-weight: 600;
+	font-size: 0.85em;
+	color: var(--text-muted);
+	border-bottom: 1px solid var(--background-modifier-border);
+}
+
+.refine-card-body {
+	padding: 0.75rem;
+}
+
 .refine-result {
 	white-space: pre-wrap;
 	line-height: 1.5;
-	border: 1px solid var(--background-modifier-border);
-	border-radius: var(--radius-s);
-	padding: 0.5rem;
 }
 
 .refine-diff-added {
@@ -60,9 +100,12 @@
 	text-decoration: underline;
 }
 
-.refine-actions {
+.refine-card-footer {
 	display: flex;
 	gap: 0.5rem;
+	justify-content: flex-end;
+	padding: 0.5rem 0.75rem;
+	border-top: 1px solid var(--background-modifier-border);
 }
 
 .refine-error {

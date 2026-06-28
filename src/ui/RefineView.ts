@@ -85,10 +85,12 @@ export class RefineView extends ItemView {
 	private renderPrimaryButtons(): void {
 		this.primaryButtonsEl.empty();
 		const isBusy = this.state.kind === "loading";
+		const lastUsedPath = this.plugin.settings.lastUsedSkillPath;
 		for (const skill of this.plugin.skillRegistry.getPrimary()) {
-			const button = this.primaryButtonsEl.createEl("button", {
-				text: skill.icon ? `${skill.icon} ${skill.name}` : skill.name,
-			});
+			const button = this.primaryButtonsEl.createEl("button", { cls: "refine-skill-button" });
+			if (skill.filePath === lastUsedPath) button.addClass("refine-skill-button-last-used");
+			if (skill.icon) button.createSpan({ cls: "refine-skill-icon", text: skill.icon });
+			button.createSpan({ cls: "refine-skill-label", text: skill.name });
 			button.disabled = isBusy;
 			button.addEventListener("click", () => void this.runSkill(skill));
 		}
@@ -107,27 +109,37 @@ export class RefineView extends ItemView {
 				break;
 			}
 			case "loading": {
-				const loading = this.bodyEl.createDiv({ cls: "refine-loading" });
+				const card = this.bodyEl.createDiv({ cls: "refine-card" });
+				const loading = card.createDiv({ cls: "refine-card-body refine-loading" });
 				loading.createDiv({ cls: "refine-spinner" });
 				loading.createSpan({ text: "Refining…" });
 				break;
 			}
 			case "result": {
+				const skill = this.state.context.skill;
+				const card = this.bodyEl.createDiv({ cls: "refine-card" });
+				card.createDiv({
+					cls: "refine-card-header",
+					text: skill.icon ? `${skill.icon} ${skill.name}` : skill.name,
+				});
+
 				const tokens = computeWordDiff(this.state.context.originalText, this.state.transformedText);
-				const resultEl = this.bodyEl.createDiv({ cls: "refine-result" });
+				const resultEl = card.createDiv({ cls: "refine-card-body refine-result" });
 				renderWordDiff(resultEl, tokens);
 
-				const actionsEl = this.bodyEl.createDiv({ cls: "refine-actions" });
-				const replaceButton = actionsEl.createEl("button", { text: "Replace in note" });
+				const actionsEl = card.createDiv({ cls: "refine-card-footer" });
+				const replaceButton = actionsEl.createEl("button", { text: "Replace in note", cls: "mod-cta" });
 				replaceButton.addEventListener("click", () => this.replaceInNote());
 				const copyButton = actionsEl.createEl("button", { text: "Copy" });
 				copyButton.addEventListener("click", () => void this.copyResult());
 				break;
 			}
 			case "error": {
-				this.bodyEl.createDiv({ cls: "refine-error", text: this.state.message });
+				const card = this.bodyEl.createDiv({ cls: "refine-card" });
+				card.createDiv({ cls: "refine-card-body refine-error", text: this.state.message });
 				const errorContext = this.state.context;
-				const retryButton = this.bodyEl.createEl("button", { text: "Retry" });
+				const actionsEl = card.createDiv({ cls: "refine-card-footer" });
+				const retryButton = actionsEl.createEl("button", { text: "Retry", cls: "mod-cta" });
 				retryButton.addEventListener("click", () => void this.runSkill(errorContext.skill, true));
 				break;
 			}
