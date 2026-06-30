@@ -1,0 +1,29 @@
+{
+  "name": "obsidian-refine",
+  "version": "1.0.0",
+  "description": "LLM driven editing Obsidian plugin inspired by Apple Intelligence Writing Tools",
+  "main": "main.js",
+  "private": true,
+  "scripts": {
+    "dev": "node esbuild.config.mjs",
+    "build": "tsc -noEmit -skipLibCheck && node esbuild.config.mjs production",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@codemirror/view": "^6.43.4",
+    "@types/diff": "^7.0.2",
+    "@types/node": "^20.11.0",
+    "builtin-modules": "4.0.0",
+    "esbuild": "^0.28.1",
+    "obsidian": "latest",
+    "tslib": "^2.8.1",
+    "typescript": "5.4.5",
+    "vitest": "^4.1.9"
+  },
+  "dependencies": {
+    "diff": "^5.2.0",
+    "gray-matter": "^4.0.3"
+  }
+}

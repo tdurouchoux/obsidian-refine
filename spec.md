@@ -148,7 +148,7 @@ All commands can be assigned to custom hotkeys in Obsidian's hotkey settings.
 
 ## Creating a New Skill
 
-Running **Refine: New skill** prompts for a filename, then creates a new `.md` file in the skills folder pre-filled with a template covering all available frontmatter fields and placeholder sections for description, instructions, and examples. The file opens immediately in the editor so the user can start writing.
+Running **Refine: New skill** creates a new untitled `.md` file (e.g. `Untitled.md`, auto-suffixed with a number if that name is already taken) in the skills folder, pre-filled with a template covering all available frontmatter fields and placeholder sections for description, instructions, and examples. The file opens immediately in the editor so the user can rename it and start writing.
 
 ---
 
