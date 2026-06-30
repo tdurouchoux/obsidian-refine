@@ -1,27 +1,49 @@
 ---
 name: Summarise
-description: Summarises longer text into a short overview. Use to condense a paragraph or section down to its key points.
+description: Structure rough, hastily written notes into a clear, readable report. Trigger on "summarize", "structure my notes", "fais un résumé", "mets en forme mes notes", "synthétise", "turn this into a report", "rends ça lisible", or any request to clean up and organize raw notes into something presentable. Works in French and English, auto-detecting the language.
 icon: 📋
-primary: false
+primary: true
+order: 3
 ---
+# Summarize
 
-# Summarise
+Transform rough notes into a clear, structured report. Auto-detect language (FR/EN).
 
-## Description
-Summarises the text into a short overview covering only its key points.
+**Do:** reorganize into thematic sections, each as a bullet list. End with a short conclusion paragraph pulling together key takeaways or decisions. **Don't:** add information, draw conclusions not implied by the notes, or remove content. Never translate — output stays in the input language.
 
-## When to use
-When the selected text is long and you want a condensed summary instead.
+**Output:** structured report only — no preamble, no meta-commentary.
 
-## Instructions
-Summarise the following text into a short overview.
-Keep only the key points; omit minor details.
-Return only the summary, no preamble or explanation.
+## Format
 
-## Examples
+**[Section title]**
 
-### Input
-The quarterly report showed revenue grew 12% year over year, driven primarily by strong performance in the European market, while costs rose only 4%, leading to an overall improvement in operating margin.
+- point
+- point
 
-### Output
-Revenue grew 12% YoY, mainly from Europe, while costs rose just 4%, improving operating margin.
+**[Section title]**
+
+- point
+- point
+
+[Conclusion paragraph]
+
+## Example
+
+**FR →** "réu ce matin - retard projet X pb technique - livraison repoussée 15 mars - John s'en occupe - point hebdo mis en place - budget ok pas de soucis - client prévenu il attend notre retour"
+
+→ **Projet X — Avancement**
+
+- Retard dû à des problèmes techniques
+- Date de livraison repoussée au 15 mars
+- John est responsable du suivi
+
+**Suivi & Communication**
+
+- Point hebdomadaire mis en place
+- Client informé, en attente de notre retour
+
+**Budget**
+
+- Pas d'impact budgétaire
+
+Le projet X accuse un retard technique, avec une nouvelle livraison prévue le 15 mars. John prend en charge le suivi, un point hebdomadaire est instauré et le client a été informé. Le budget reste inchangé.

@@ -1,29 +1,23 @@
 ---
 name: Make Formal
-description: Rewrites text in a formal, professional tone. Use when the text feels too casual for its context.
+description: Rewrite text in a formal register while preserving the original meaning and structure. Trigger on "make this formal", "formalize this", "rends ça plus formel", "mets ça en langage soutenu", "reformule en formel", "make it professional", or any request to raise the register of a text. Works in French and English, auto-detecting the language.
 icon: 🎩
-primary: true
-order: 1
+primary: false
+order:
 ---
 
 # Make Formal
 
-## Description
-Rewrites text in a formal, professional tone while preserving all factual content.
+Rewrite text in a formal register — same meaning, elevated tone. Auto-detect language (FR/EN).
 
-## When to use
-When the selected text is too casual, uses informal language, or needs to sound more professional.
+**Change:** informal vocabulary, contractions, colloquialisms, casual phrasing. **Keep:** all content, meaning, and structure. Never translate — output stays in the input language.
 
-## Instructions
-Rewrite the following text in a formal, professional tone.
-Preserve all factual content and meaning exactly.
-Do not add or remove information.
-Return only the rewritten text, no preamble or explanation.
+**Output:** formal version only — no labels, no explanation, no preamble.
 
-## Examples
+**Warning:** don't overdo it, it needs to be formal but most of all understandable.
 
-### Input
-hey can u send me that doc when u get a chance thx
+## Example
 
-### Output
-Could you please send me the document at your earliest convenience? Thank you.
+**FR →** "Salut, je voulais te dire qu'on a pas pu finir le truc à temps, désolé." → Je vous informe que nous n'avons malheureusement pas été en mesure de finaliser ce travail dans les délais impartis.
+
+**EN →** "Hey, just so you know we couldn't get it done in time, sorry about that." → I wish to inform you that we were unfortunately unable to complete this within the required timeframe.

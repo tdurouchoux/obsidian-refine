@@ -1,28 +1,20 @@
 ---
 name: Make Concise
-description: Shortens text while keeping its key meaning. Use when the text is too long or repetitive.
+description: Shorten and tighten text by removing filler, redundancy, and unnecessary words while preserving the full meaning. Trigger on "make this concise", "shorten this", "tighten this up", "rends ça plus concis", "raccourcis ce texte", "enlève les répétitions", "make it shorter", or any request to reduce length without losing content. Works in French and English, auto-detecting the language.
 icon: ⬇️
 primary: true
 order: 4
 ---
-
 # Make Concise
 
-## Description
-Shortens the text, removing redundancy while preserving the key meaning.
+Shorten text by cutting filler and redundancy — same meaning, fewer words. Auto-detect language (FR/EN).
 
-## When to use
-When the selected text is longer or more repetitive than it needs to be.
+**Cut:** filler words, redundant phrases, unnecessary repetition, over-explanation, padding. **Keep:** all key information, meaning, tone, and register. Never translate — output stays in the input language.
 
-## Instructions
-Rewrite the following text to be as concise as possible.
-Remove redundant phrasing while preserving all key information.
-Return only the rewritten text, no preamble or explanation.
+**Output:** concise version only — no labels, no explanation, no preamble.
 
-## Examples
+## Example
 
-### Input
-I just wanted to reach out and let you know that, at this point in time, we have not yet been able to finish the report.
+**FR →** "Je voulais simplement vous dire que, en ce qui concerne le rapport, nous avons bien pris en compte tous les éléments et que nous allons travailler dessus très prochainement." → Nous avons pris en compte tous les éléments du rapport et allons y travailler prochainement.
 
-### Output
-We haven't finished the report yet.
+**EN →** "I just wanted to reach out to let you know that we have taken all of the various elements into consideration and that we will be working on this in the very near future." → We've taken all elements into consideration and will work on this soon.
