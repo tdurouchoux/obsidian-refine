@@ -4,7 +4,7 @@ import type { RefineSettings, Skill } from "../types";
 
 const settings: RefineSettings = {
 	apiBaseUrl: "https://api.openai.com/v1",
-	apiKey: "",
+	apiKeySecretName: "",
 	defaultModel: "gpt-4o",
 	defaultTemperature: 0.7,
 	skillsFolder: "Refine/Skills",

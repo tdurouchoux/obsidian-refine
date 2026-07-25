@@ -170,8 +170,15 @@ export class RefineView extends ItemView {
 		this.plugin.settings.lastUsedSkillPath = context.skill.filePath;
 		await this.plugin.saveSettings();
 
+		const apiKey = this.app.secretStorage.getSecret(this.plugin.settings.apiKeySecretName);
+		if (!apiKey) {
+			this.state = { kind: "error", context, message: "No API key configured. Set one in Refine's settings." };
+			this.render();
+			return;
+		}
+
 		try {
-			const transformedText = await callChatCompletion(this.plugin.settings, context.skill, context.originalText);
+			const transformedText = await callChatCompletion(this.plugin.settings, apiKey, context.skill, context.originalText);
 			this.state = { kind: "result", context, transformedText };
 		} catch (error) {
 			this.state = { kind: "error", context, message: (error as Error).message };
