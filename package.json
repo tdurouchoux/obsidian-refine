@@ -1,6 +1,6 @@
 {
   "name": "obsidian-refine",
-  "version": "1.0.0",
+  "version": "0.2.0",
   "description": "LLM driven editing Obsidian plugin inspired by Apple Intelligence Writing Tools",
   "main": "main.js",
   "private": true,
