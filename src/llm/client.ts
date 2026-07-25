@@ -6,6 +6,7 @@ import { RefineApiError, type ChatCompletionRequest, type ChatCompletionResponse
 
 export async function callChatCompletion(
 	settings: RefineSettings,
+	apiKey: string,
 	skill: Skill,
 	selectedText: string,
 ): Promise<string> {
@@ -25,7 +26,7 @@ export async function callChatCompletion(
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
-				Authorization: `Bearer ${settings.apiKey}`,
+				Authorization: `Bearer ${apiKey}`,
 			},
 			body: JSON.stringify(body),
 			throw: false,

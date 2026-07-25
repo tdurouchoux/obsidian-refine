@@ -13,7 +13,7 @@ export interface Skill {
 
 export interface RefineSettings {
 	apiBaseUrl: string;
-	apiKey: string;
+	apiKeySecretName: string;
 	defaultModel: string;
 	defaultTemperature: number;
 	skillsFolder: string;

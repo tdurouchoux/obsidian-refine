@@ -157,7 +157,7 @@ Running **Refine: New skill** creates a new untitled `.md` file (e.g. `Untitled.
 | Setting | Default | Description |
 |---|---|---|
 | API Base URL | `https://api.openai.com/v1` | The base URL of any OpenAI-compatible endpoint |
-| API Key | — | The key used to authenticate with the provider |
+| API Key | — | Select or create a secret via Obsidian's Secret Storage (Settings → Keychain); Refine stores only a reference to it, not the raw value |
 | Default model | `gpt-4o` | Used when a skill does not specify its own model |
 | Default temperature | `0.7` | Used when a skill does not specify its own temperature |
 | Skills folder | `Refine/Skills` | Vault-relative path to the folder where skills are stored |

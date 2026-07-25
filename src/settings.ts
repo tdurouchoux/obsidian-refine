@@ -1,10 +1,10 @@
-import { PluginSettingTab, Setting } from "obsidian";
+import { PluginSettingTab, SecretComponent, Setting } from "obsidian";
 import type RefinePlugin from "./main";
 import type { RefineSettings } from "./types";
 
 export const DEFAULT_SETTINGS: RefineSettings = {
 	apiBaseUrl: "https://api.openai.com/v1",
-	apiKey: "",
+	apiKeySecretName: "",
 	defaultModel: "gpt-4o",
 	defaultTemperature: 0.7,
 	skillsFolder: "Refine/Skills",
@@ -36,14 +36,15 @@ export class RefineSettingTab extends PluginSettingTab {
 
 		new Setting(this.containerEl)
 			.setName("API key")
-			.setDesc("The key used to authenticate with the provider.")
-			.addText((text) => {
-				text.inputEl.type = "password";
-				text.setValue(this.plugin.settings.apiKey).onChange(async (value) => {
-					this.plugin.settings.apiKey = value;
-					await this.plugin.saveSettings();
-				});
-			});
+			.setDesc("Select or create a secret from Obsidian's secret storage.")
+			.addComponent((el) =>
+				new SecretComponent(this.plugin.app, el)
+					.setValue(this.plugin.settings.apiKeySecretName)
+					.onChange(async (value) => {
+						this.plugin.settings.apiKeySecretName = value ?? "";
+						await this.plugin.saveSettings();
+					}),
+			);
 
 		new Setting(this.containerEl)
 			.setName("Default model")
